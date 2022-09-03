@@ -7,44 +7,47 @@
   <form [formGroup]="paymentVerifyForm" class="center">
     <div>
       <p style="font-size: 30px">Fill Card Details</p>
-      <input
-        class="form-control"
-        formControlName="cvv"
-        type="number"
-        name="cvv"
-        placeholder="cvv"
-      /><br /><br />
+      <br />
       <input
         class="form-control"
         formControlName="cardNo"
         type="text"
         name="Card Details"
         placeholder="Enter your Card Number"
-      /><br /><br />
+      /><br />
       <input
         class="form-control"
         formControlName="expiry"
         type="text"
         name="Expiry"
         placeholder="MM/YYYY"
-      /><br /><br />
+      /><br />
+      <input
+        class="form-control"
+        formControlName="cvv"
+        type="number"
+        name="cvv"
+        placeholder="cvv"
+      /><br />
       <input
         class="form-control"
         formControlName="pin"
         type="number"
         name="pin"
         placeholder="pin"
-      /><br /><br />
+      /><br />
 
       <br />
-      <button
-        style="margin-bottom: 3%; width: 120px"
-        type="submit"
-        class="btn btn-primary"
-        (click)="savePayment()"
-      >
-        PAY
-      </button>
+      <div class="text-center">
+        <button
+          style="margin-bottom: 3%; width: 120px"
+          type="submit"
+          class="btn btn-primary"
+          (click)="savePayment()"
+        >
+          PAY
+        </button>
+      </div>
       <div *ngIf="response">Payment failed</div>
     </div>
   </form>
