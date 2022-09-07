@@ -40,7 +40,7 @@
         <label>Item Description </label
         ><input
           #itemdesc="ngModel"
-          placeholder="Enter description of items"
+          placeholder="Enter brand, quantity, etc of items"
           (input)="handleName($event)"
           class="form-control"
           [(ngModel)]="item.itemDescription"
@@ -49,6 +49,55 @@
         />
         <p *ngIf="itemdesc.touched && itemdesc.invalid" class="text-danger">
           Description required
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Pickup address</label
+        ><input
+          #itempickup="ngModel"
+          placeholder="Enter item full pickup address"
+          (input)="handleName($event)"
+          class="form-control"
+          [(ngModel)]="pickupAdd"
+          name="pickup-add"
+          required
+        />
+        <p *ngIf="itempickup.touched && itempickup.invalid" class="text-danger">
+          Pickup address required
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Drop address</label
+        ><input
+          #itemdrop="ngModel"
+          placeholder="Enter item full drop address"
+          (input)="handleName($event)"
+          class="form-control"
+          [(ngModel)]="dropAdd"
+          name="drop-add"
+          required
+        />
+        <p *ngIf="itemdrop.touched && itemdrop.invalid" class="text-danger">
+          Drop address required
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Estimated Distance (in KM) </label
+        ><input
+          #dist="ngModel"
+          type="number"
+          placeholder="Enter Estimated Distance in KM"
+          (input)="handleName($event)"
+          class="form-control"
+          [(ngModel)]="orderDistance"
+          name="dist"
+          required
+        />
+        <p *ngIf="dist.touched">Estimated Cost Rs: {{ this.orderCost }}</p>
+        <p *ngIf="dist.touched && dist.invalid" class="text-danger">
+          Distance required
         </p>
       </div>
 
@@ -76,7 +125,7 @@
           type="submit"
           class="btn btn-primary"
         >
-          Submit
+          Procced to Choose vehicle
         </button>
         <button
           *ngIf="name.invalid || itemdesc.invalid || type.invalid"
@@ -84,7 +133,7 @@
           type="submit"
           class="btn btn-primary"
         >
-          Submit
+          Procced to Choose vehicle
         </button>
         <!-- <h4 *ngIf="userAccountLoggedin" class="text-success">
           {{ userAccountLoginStatusMsg }}

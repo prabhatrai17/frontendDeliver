@@ -17,7 +17,7 @@ userId:any;
     imgURL: "",
     revenueGenerated: 0,
     vehicleAvailability: true,
-    userId:0,
+    DriverUserId:0,
     orderId:0,
     userDlNumber:""
   }
@@ -30,7 +30,7 @@ userId:any;
       console.log(this.userId);
 
       if(this.userId==null)this.userId=localStorage.getItem("userId");
-      this.data.userId=this.userId;
+      this.data.DriverUserId=this.userId;
       });
     
   }

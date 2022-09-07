@@ -1,5 +1,7 @@
 .btn{
     background-color: rgb(220, 216, 247);
+    margin: 10px;
+    
 }
 .container {
     margin-top: 20px;
@@ -16,6 +18,11 @@
     text-indent: 5%;
     
 }
+.filter-btn{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
 .mat-elevation-z10{
     /* display: flex; */
    
@@ -25,5 +32,12 @@
 }
 .vehicle-card{
     width: 80%;
+}
+.row{
+    width: 40%;
+}
+.badge{
+    width: 100px;
+    margin: 7px;
 }
 
