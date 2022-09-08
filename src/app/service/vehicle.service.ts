@@ -21,22 +21,17 @@ export class BackendService {
   public getVehicleByUserEmail(userEmail:any) {
     return this.http.get(`${this.API}/vehicle/${userEmail}`);
   }
-//get vehicle by driverUserID
-  public getVehicleByDriverUserId(driverUserId:any) {
+//get vehicle by userID
+  public getVehicleByUserId(userId:any) {
     console.log("get vehicle by userId called");
-    return this.http.get(`${this.API}/vehicle-driver/${driverUserId}`);
-  }
-  //get vehicle revenue by driverUserID
-  public getVehicleRevenueByDriverUserId(driverUserId:any) {
-    console.log("get vehicle rev called");
-    return this.http.get(`${this.API}/vehicle-revenue/${driverUserId}`);
+    return this.http.get(`${this.API}/vehicle-driver/${userId}`);
   }
   public deleteVehicle(id:any) {
     return this.http.delete(this.API + '/deleteVehicle?id=' + id);
   }
 //service to get order assigned to driver
-  getDriverAssignedOrders(driverUserId:number):Observable<any>{
-    console.log("user id before pass to get all driver orders: "+driverUserId);
-    return this.http.get(`${this.API}/driver/orders/${driverUserId}`);
+  getDriverAssignedOrders(userId:number):Observable<any>{
+    console.log("user id before pass to get all driver orders: "+userId);
+    return this.http.get(`${this.API}/driver/orders/${userId}`);
  }
 }

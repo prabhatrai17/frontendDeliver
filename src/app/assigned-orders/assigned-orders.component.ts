@@ -41,8 +41,6 @@ export class AssignedOrdersComponent implements OnInit {
   dirverEmail:any;
   revenue:any;
   vehicle:any;
-  selectedValue:any;
-  days:any;
   constructor(private route:ActivatedRoute,private router:Router,private vehicleService:BackendService,private orderService:FullOrderService,private changeDetectorRefs: ChangeDetectorRef) { }
   id:any;
   i:any;
@@ -55,8 +53,7 @@ export class AssignedOrdersComponent implements OnInit {
       if(this.id==null)this.id=localStorage.getItem("id");
       });
       
-      
-      this.vehicleService.getVehicleByDriverUserId(this.id).subscribe(data=>{
+      this.vehicleService.getVehicleByUserId(this.id).subscribe(data=>{
         console.log("vehicle got");
         console.log(data);
         this.vehicle=data;
@@ -86,28 +83,16 @@ export class AssignedOrdersComponent implements OnInit {
                          
                   }
         }
+     
+
       }
       this.dirverEmail=this.assignedOrderObjArr[0].user.email;
       console.log(this.dirverEmail);
-      // console.log(this.assignedOrderObjArr[0]);
-      // this.status1=this.assignedOrderObjArr[0].deliveryStatus;
-      // this.status2=this.assignedOrderObjArr[1].deliveryStatus;
+   
+      this.status1=this.assignedOrderObjArr[0].deliveryStatus;
+      this.status2=this.assignedOrderObjArr[1].deliveryStatus;
       console.log("final fetched arr of orders : ");
-      // this.fullOrder=this.assignedOrderObjArr[0];
-      this.fullOrder.arrivingStatus=this.assignedOrderObjArr[0].arrivingStatus;
-      this.fullOrder.deliveryStatus=this.assignedOrderObjArr[0].deliveryStatus;
-      this.fullOrder.dispatchStatus=this.assignedOrderObjArr[0].dispatchStatus;
-      this.fullOrder.dropAddress=this.assignedOrderObjArr[0].dropAddress;
-      this.fullOrder.pickupAddress=this.assignedOrderObjArr[0].pickupAddress;
-      this.fullOrder.estCost=this.assignedOrderObjArr[0].estCost;
-      this.fullOrder.estDistance=this.assignedOrderObjArr[0].estDistance;
-      this.fullOrder.orderCompleted=this.assignedOrderObjArr[0].orderCompleted;
-      this.fullOrder.orderDate=this.assignedOrderObjArr[0].orderDate;
-      this.fullOrder.paymentStatus=this.assignedOrderObjArr[0].paymentStatus;
-      
-      
       console.log(this.assignedOrderObjArr);
-      console.log(this.fullOrder);
       })
     
        this.sampleOrderStatus= [
@@ -119,32 +104,21 @@ export class AssignedOrdersComponent implements OnInit {
 
     
   }
-  totalRev():void{
-     this.vehicleService.getVehicleRevenueByDriverUserId(this.id).subscribe(data=>{
-      console.log("revenue received");
-      console.log(data);
-      this.revenue=data;
-     })
-     this.reloadCurrentRoute();
-  }
   statusSelected(value:any,orderId:any){
     console.log(value);
     console.log("orderId"+orderId);
     this.orderId=orderId;
-    this.selectedValue=value;
-    console.log("status selected below fOrder obj");
+    
+    if(value==="pickup order")
+    this.fullOrder.pickupStatus='true';
+    if(value=="arriving order")
+    this.fullOrder.arrivingStatus='true';
+    if(value=="dispatch order")
+    this.fullOrder.dispatchStatus='true';
+    if(value=="Order Delivered")
+    this.fullOrder.deliveryStatus='true';
+    
     console.log(this.fullOrder);
-    
-    // if(value==="pickup order")
-    // this.fullOrder.pickupStatus='true';
-    // if(value=="arriving order")
-    // this.fullOrder.arrivingStatus='true';
-    // if(value=="dispatch order")
-    // this.fullOrder.dispatchStatus='true';
-    // if(value=="Order Delivered")
-    // this.fullOrder.deliveryStatus='true';
-    
-    
     }
     logout(){
       localStorage.clear;
@@ -156,42 +130,14 @@ export class AssignedOrdersComponent implements OnInit {
       .then(() => {
           this.router.navigate(['assigned-orders']);
       });
-     // this.router.navigate(['assigned-orders']);
+      //this.router.navigate(['assigned-orders']);
   }
-    onClick(orderId:any):any{
-      if(this.selectedValue==="pickup order")
-    this.fullOrder.pickupStatus='true';
-    if(this.selectedValue=="arriving order")
-    this.fullOrder.arrivingStatus='true';
-    if(this.selectedValue=="dispatch order")
-    this.fullOrder.dispatchStatus='true';
-    if(this.selectedValue=="Order Delivered")
-    this.fullOrder.deliveryStatus='true';
-    console.log("fOrder before passed to backend");
-    
-
-    console.log(this.fullOrder);
+    onClick():any{
       this.orderService.updateOrderStatus(this.fullOrder,this.orderId).subscribe(data=>{
         console.log(data);
         // this.changeDetectorRefs.detectChanges();
-        //this.reloadCurrentRoute();
+        this.reloadCurrentRoute();
       })
-      this.orderService.getDriverRevenueByDriverUserId(this.id).subscribe(data=>{
-        console.log("data after total rev called");
-        console.log(data);
-        this.revenue=data;
-      })
-      this.reloadCurrentRoute();
-    }
-    getRevenueByDays(event:any):void{
-     console.log(event.target.value);
-     this.days=event.target.value;
-     this.orderService.getDriverRevenueByDays(this.id,this.days).subscribe(data=>{
-      console.log("data after days rev call");
-      console.log(data);
-      this.revenue=data;
-      this.reloadCurrentRoute();
-     })
     }
 
 }

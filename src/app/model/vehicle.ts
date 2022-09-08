@@ -7,7 +7,7 @@ export class Vehicle
     revenueGenerated!:number;
     vehicleAvailability!:boolean;
     imgURL!:string;
-    DriverUserId:number=0;
+    userId:number=0;
     userDlNumber:number=0;
     orderId:number=0;
 

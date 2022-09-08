@@ -25,10 +25,10 @@ export class PaymentService {
       headers : new HttpHeaders().set('Content-Type','application/json'),
       });
     }
-    validatePayment(payment:TempPaymentDetail,orderAmount:any,orderId:any):Observable<any>{
+    validatePayment(payment:TempPaymentDetail,orderAmount:any):Observable<any>{
       console.log("inside validate service");
       console.log(payment);
-      return this.httpClient.post(`http://localhost:8080/payment_validate/${orderAmount}/${orderId}`,payment);
+      return this.httpClient.post(`http://localhost:8080/payment_validate/${orderAmount}`,payment);
       // headers : new HttpHeaders().set('Content-Type','application/json'),
       
     }

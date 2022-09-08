@@ -18,30 +18,7 @@
     </div>
   </div>
 </nav>
-<div class="container card">
-  <h3 class="text-center">Your Total Revenue: {{ revenue }}</h3>
-
-  <p class="text-center">Filter by:</p>
-  <div class="filter-btn">
-    <button
-      value="7"
-      class="btn btn-outline-primary"
-      (click)="getRevenueByDays($event)"
-    >
-      last Week
-    </button>
-    <button
-      value="30"
-      class="btn btn-outline-primary"
-      (click)="getRevenueByDays($event)"
-    >
-      Last Month
-    </button>
-    <button class="btn btn-outline-primary" (click)="totalRev()">Total</button>
-  </div>
-</div>
-
-<hr />
+<h3 class="text-center">Your Total Revenue: {{ revenue }}</h3>
 <h3 class="text-center">Your Vehicle</h3>
 <div class="container">
   <mat-card class="mat-elevation-z10 vehicle-card">
@@ -58,14 +35,6 @@
     </div>
     <div>
       <!-- <img src="vehicle.imgURL" /> -->
-      <div class="text-center">
-        <img
-          class="alignment"
-          [src]="vehicle.imgURL"
-          alt="Avatar"
-          style="width: 360px; height: 200px"
-        />
-      </div>
     </div>
   </mat-card>
 </div>
@@ -115,9 +84,9 @@
       </mat-form-field>
       <p>{{ status }}</p>
 
-      <!-- <mat-card-content>
+      <mat-card-content>
         Current PickupStatus: {{ order.pickupStatus }}
-      </mat-card-content> -->
+      </mat-card-content>
       <mat-card-content>
         Current Delivery Status: {{ order.deliveryStatus }}
       </mat-card-content>
@@ -126,7 +95,7 @@
         mat-button
         color="primary"
         class="btn"
-        (click)="onClick(order.orderId)"
+        (click)="onClick()"
       >
         Update Status
       </button>

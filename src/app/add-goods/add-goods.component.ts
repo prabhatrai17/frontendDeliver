@@ -28,12 +28,6 @@ export class AddGoodsComponent implements OnInit {
    userId:any;
    orderId:any;
    obj:any;
-   pickupAdd!:any;
-   dropAdd!:any;
-   orderDistance!:any;
-   orderCost!:any;
-   fuelPrice:any=100;
-   vehicleAvg:any=12;
 
   name:string="";
   // age!:number;
@@ -83,14 +77,8 @@ userObj:User= new User();
   handleName(event:Event){
     console.log("inside name handeler funtion");
     console.log((<HTMLInputElement>event.target).value);
-    this.name=(<HTMLInputElement>event.target).name;
+    this.name=(<HTMLInputElement>event.target).value;
     console.log(this.name);
-    if(this.name=="dist"){
-      this.orderCost=(this.orderDistance/this.vehicleAvg)*this.fuelPrice;
-      this.orderCost=this.orderCost+(this.orderCost*15)/100;
-      console.log("cost: "+this.orderCost);
-    }
-
    
 
     //console.log(event);
@@ -102,10 +90,6 @@ userObj:User= new User();
     console.log(submit);
     this.fullOrder.item=this.item;
     this.fullOrder.user=this.userObj;
-    this.fullOrder.pickupAddress=this.pickupAdd;
-    this.fullOrder.dropAddress=this.dropAdd;
-    this.fullOrder.estDistance=this.orderDistance;
-    this.fullOrder.estCost=this.orderCost;
     console.log(this.fullOrder);
     console.log("full order object above");
     this.fullOrderService.addFullOrder(this.fullOrder).subscribe(data=>{
@@ -133,10 +117,10 @@ userObj:User= new User();
      //create item called within this class
   }
   goToVehicle(userId: any, orderId: any) {
-    console.log("user id before passed to route vehicle choose");
+    console.log("user id before passed to route order");
     console.log(userId);
     console.log(orderId);
-    this.router.navigate(['vehicle'],{queryParams:{userId,orderId,orderCost:this.orderCost}});
+    this.router.navigate(['vehicle'],{queryParams:{userId,orderId}});
   }
   onSelected(event:Event){
     console.log("inside onslected ");

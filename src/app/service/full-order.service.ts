@@ -40,14 +40,4 @@ updateOrderStatus(obj:any,orderId:any):Observable<any>{
   // var headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
   return this.httpClient.post<any>(`${this.baseUrl}/status-update/${orderId}`,obj);
 }
- //get driver total revenue by driverUserID
- public getDriverRevenueByDriverUserId(driverUserId:any) {
-  console.log("get total rev called");
-  return this.httpClient.get(`${this.baseUrl}/driver-revenue/${driverUserId}`);
-}
- //get driver total revenue by driverUserID
- public getDriverRevenueByDays(driverUserId:any,days:any) {
-  console.log("get total rev by days called");
-  return this.httpClient.get(`${this.baseUrl}/driver-revenue-days/${driverUserId}/${days}`);
-}
 }

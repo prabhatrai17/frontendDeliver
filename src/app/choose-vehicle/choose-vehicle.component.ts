@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Vehicle } from '../model/vehicle';
 import { ChooseVehicleService } from '../service/choose-vehicle.service';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-choose-vehicle',
@@ -14,20 +14,17 @@ export class ChooseVehicleComponent implements OnInit {
   @Input()vehicle!:Vehicle;
 
   vehicleObj:Vehicle= new Vehicle();
-  constructor(private chooseVehicleService:ChooseVehicleService,private route:ActivatedRoute,private router:Router) { }
+  constructor(private chooseVehicleService:ChooseVehicleService,private route:ActivatedRoute) { }
   orderId!:any;
   userId!:any;
-  orderCost!:any;
   showButtons:any=true;
   noVehicleAvailable:any;
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params=>{
       this.orderId=params.get('orderId');
       this.userId=params.get('userId');
-      this.orderCost=params.get('orderCost');
        console.log(this.userId);
        console.log(this.orderId);
-       console.log(this.orderCost);
       if(this.orderId ==null) this.showButtons=false;
       });
       if(this.orderId !=null){
@@ -63,13 +60,6 @@ export class ChooseVehicleComponent implements OnInit {
       console.log("data after save service call ");
       console.log(data);
       alert("vehicle selected")
-      this.goToPaymentVerify(this.userId, this.orderId);
     })
-  }
-  goToPaymentVerify(userId: any, orderId: any) {
-    console.log("user id before passed to pay verify");
-    console.log(userId);
-    console.log(orderId);
-    this.router.navigate(['payment-verify'],{queryParams:{userId,orderId,orderCost:this.orderCost}});
   }
 }
